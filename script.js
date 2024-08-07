@@ -1,3 +1,4 @@
+
 window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function(result) {

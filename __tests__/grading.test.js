@@ -1,6 +1,8 @@
 /**
  * @jest-environment node
  */
+ 
+ 
 const fs = require('fs');
 const path = require("path");
 const { JSDOM } = require("jsdom");
@@ -9,6 +11,7 @@ const { document } = window;
 const { screen } = require('@testing-library/jest-dom');
 
 var studentFunctions = require('../scriptHelper.js');
+const { default: JSDOMEnvironment } = require('jest-environment-jsdom');
 let script = fs.readFileSync(path.resolve(__dirname, "../script.js"), 'utf8');
 
 const studentPlanet = studentFunctions.pickPlanet.toString();
@@ -168,3 +171,4 @@ describe('Test student work on helper functions', () => {
    });
 
 });
+
