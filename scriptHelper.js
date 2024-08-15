@@ -36,7 +36,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     let readyForLaunch = true;
     
   // Make the checklist visible
-  list.style.visibility = "visible";  // <-- Add this line here
+  list.style.visibility = "visible";  
   
     // Add event listener to the form submission
 document.getElementById("launchForm").addEventListener("submit", function(event) {
@@ -50,6 +50,18 @@ document.getElementById("launchForm").addEventListener("submit", function(event)
     formSubmission(document, document.getElementById("faultyItems"), pilot, copilot, fuelLevel, cargoLevel);
 });
 
+    // Set initial status to "Awaiting Information Before Launch"
+    launchStatus.innerHTML = "Awaiting Information Before Launch";
+    launchStatus.style.color = "black";  
+    list.style.visibility = "visible";
+
+
+// Check if all fields are blank
+if (pilot === "" && copilot === "" && fuelLevel === "" && cargoMass === "") {
+    alert("All fields are required");
+    return;  
+}
+
     // Update pilot and co-pilot status
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
@@ -62,7 +74,7 @@ document.getElementById("launchForm").addEventListener("submit", function(event)
     
     let fuelValidation = validateInput(fuelLevel);
     if (fuelValidation !== "Is a Number") {
-        alert("Fuel level must be a number.");
+        alert("Make sure to enter valid information for each field!");
         readyForLaunch = false;
     }
 
@@ -71,8 +83,8 @@ document.getElementById("launchForm").addEventListener("submit", function(event)
 if (fuelLevel < 10000) {
     fuelStatus.innerHTML = "Fuel level too low for launch";
     launchStatus.innerHTML = "Shuttle Not Ready for Launch";
-    launchStatus.style.color = "red";  // Ensure this line is present
-    list.style.visibility = "visible"; // Ensure this line is present
+    launchStatus.style.color = "red";  
+    list.style.visibility = "visible"; 
     readyForLaunch = false;
 } else {
     fuelStatus.innerHTML = "Fuel level high enough for launch";
@@ -80,11 +92,9 @@ if (fuelLevel < 10000) {
 
 let cargoValidation = validateInput(cargoMass);
     if (cargoValidation !== "Is a Number") {
-        alert("Cargo mass must be a number.");
+        alert("Make sure to enter valid information for each field!");
         readyForLaunch = false;
     }
-
-
 
 // Validate cargo mass
 if (cargoMass > 10000) {
