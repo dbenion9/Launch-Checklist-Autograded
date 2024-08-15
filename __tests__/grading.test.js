@@ -2,7 +2,6 @@
  * @jest-environment node
  */
  
- 
 const fs = require('fs');
 const path = require("path");
 const { JSDOM } = require("jsdom");
@@ -100,7 +99,7 @@ describe('Test student work on helper functions', () => {
          // Shuttle should be not be ready for launch, fuel too low
          studentFunctions.formSubmission(document, list, "Chris", "Bob", 0, 5);
          expect(list).toBeVisible();
-         expect(h2).toHaveStyle({color: 'red'});
+         expect(h2).toHaveStyle({color: 'rgb(255, 0, 0)'});
          expect(h2).toHaveTextContent("Shuttle Not Ready for Launch");
          expect(pilotStatus).toHaveTextContent("Pilot Chris is ready for launch");
          expect(copilotStatus).toHaveTextContent("Co-pilot Bob is ready for launch");
@@ -112,7 +111,7 @@ describe('Test student work on helper functions', () => {
       // Shuttle should not be ready for launch, cargo too high
       studentFunctions.formSubmission(document, list, "Chris", "Bob", 10000, 100000);
       expect(list).toBeVisible();
-      expect(h2).toHaveStyle({color: 'red'});
+      expect(h2).toHaveStyle({color: 'rgb(255, 0, 0)'});
       expect(h2).toHaveTextContent("Shuttle Not Ready for Launch");
       expect(pilotStatus).toHaveTextContent("Pilot Chris is ready for launch");
       expect(copilotStatus).toHaveTextContent("Co-pilot Bob is ready for launch");
@@ -124,7 +123,7 @@ describe('Test student work on helper functions', () => {
       // Shuttle should not be ready for launch, cargo too high, fuel too low
       studentFunctions.formSubmission(document, list, "Chris", "Bob", 0, 100000);
       expect(list).toBeVisible();
-      expect(h2).toHaveStyle({color: 'red'});
+      expect(h2).toHaveStyle({color: 'rgb(255, 0, 0)'});
       expect(h2).toHaveTextContent("Shuttle Not Ready for Launch");
       expect(pilotStatus).toHaveTextContent("Pilot Chris is ready for launch");
       expect(copilotStatus).toHaveTextContent("Co-pilot Bob is ready for launch");
@@ -136,7 +135,7 @@ describe('Test student work on helper functions', () => {
       // Shuttle should be ready for launch, enough fuel and cargo
       studentFunctions.formSubmission(document, list, "Chris", "Bob", 10000, 1);
       expect(list).toBeVisible();
-      expect(h2).toHaveStyle({color: 'green'});
+      expect(h2).toHaveStyle({color: 'rgb(0, 128, 0)'});
       expect(h2).toHaveTextContent("Shuttle is Ready for Launch");
       expect(pilotStatus).toHaveTextContent("Pilot Chris is ready for launch");
       expect(copilotStatus).toHaveTextContent("Co-pilot Bob is ready for launch");
@@ -171,4 +170,3 @@ describe('Test student work on helper functions', () => {
    });
 
 });
-

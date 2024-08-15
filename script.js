@@ -1,4 +1,3 @@
-
 window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch();
     listedPlanetsResponse.then(function(result) {
@@ -20,3 +19,5 @@ window.addEventListener("load", function() {
         formSubmission(document, document.getElementById("faultyItems"), pilotName, copilotName, fuelLevel, cargoMass);
     });
 });
+
+
