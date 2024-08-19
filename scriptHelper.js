@@ -46,64 +46,58 @@ document.getElementById("launchForm").addEventListener("submit", function(event)
     formSubmission(document, document.getElementById("faultyItems"), pilot, copilot, fuelLevel, cargoLevel);
 });
 
-     let readyForLaunch = true;
+
+    let readyForLaunch = true;
     let showAlert = false;
     
-    // Initially hide the list
+    // Reset the checklist and launch status to their default states
     list.style.visibility = "hidden";
-  
-
-    // Set initial status to "Awaiting Information Before Launch"
     launchStatus.innerHTML = "Awaiting Information Before Launch";
-    launchStatus.style.color = "black";  
+    launchStatus.style.color = "black";
 
-
-
-    // Validate Pilot inputs
-    if (pilot === "" || copilot === "" || isNaN(fuelLevel) || isNaN(cargoMass)) {
+    // Basic validation checks including empty strings and NaN
+    if (pilot === "" || copilot === "" || fuelLevel === "" || cargoMass === "" || isNaN(fuelLevel) || isNaN(cargoMass)) {
         showAlert = true;
-    } else {
-    
-        // Check fuel level
-        if (fuelLevel < 10000) {
-            readyForLaunch = false;
-            document.getElementById('fuelStatus').innerHTML = "Fuel level too low for launch";
-        } else {
-            document.getElementById('fuelStatus').innerHTML = "Fuel level high enough for launch";
-        }
-
-        // Check cargo mass
-        if (cargoMass > 10000) {
-            readyForLaunch = false;
-            document.getElementById('cargoStatus').innerHTML = "Cargo mass too heavy for launch";
-        } else {
-            document.getElementById('cargoStatus').innerHTML = "Cargo mass low enough for launch";
-        }
-
-        // Update pilot and copilot status
-        document.getElementById('pilotStatus').innerHTML = `Pilot ${pilot} is ready for launch`;
-        document.getElementById('copilotStatus').innerHTML = `Co-pilot ${copilot} is ready for launch`;
     }
 
-    // Show the alert and stop if there's invalid input
+    // If there are any basic validation errors, show an alert and exit
     if (showAlert) {
         alert("All fields are required and fuel level and cargo mass must be valid numbers!");
-        return; 
+        return; // Stop further execution if there are validation errors
     }
 
-    // Update launch status and list visibility
-    if (readyForLaunch) {
-        document.getElementById('launchStatus').innerHTML = "Shuttle is Ready for Launch";
-        document.getElementById('launchStatus').style.color = "rgb(0, 128, 0)";
+    // Detailed validation
+    if (fuelLevel < 10000) {
+        readyForLaunch = false;
+        fuelStatus.innerHTML = "Fuel level too low for launch";
     } else {
-        document.getElementById('launchStatus').innerHTML = "Shuttle Not Ready for Launch";
-        document.getElementById('launchStatus').style.color = "rgb(255, 0, 0)";
+        fuelStatus.innerHTML = "Fuel level high enough for launch";
     }
 
-    // Make the list visible only when all fields pass validation checks
-    document.getElementById('faultyItems').style.visibility = "visible";
+    if (cargoMass > 10000) {
+        readyForLaunch = false;
+        cargoStatus.innerHTML = "Cargo mass too heavy for launch";
+    } else {
+        cargoStatus.innerHTML = "Cargo mass low enough for launch";
+    }
+
+    pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
+    copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
+
+        
+    // Only update the launch status and make the checklist visible if everything is valid
+    if (readyForLaunch) {
+        launchStatus.innerHTML = "Shuttle is Ready for Launch";
+        launchStatus.style.color = "rgb(0, 128, 0)";
+        list.style.visibility = "visible"; // Show the checklist
+    } else {
+        // If validations fail, keep the default state and update the checklist with errors
+        launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = "rgb(255, 0, 0)";
+       
+    }
 }
-    
+ 
 
 // Function to fetch planet data
 async function myFetch() {
