@@ -94,7 +94,7 @@ document.getElementById("launchForm").addEventListener("submit", function(event)
         // If validations fail, keep the default state and update the checklist with errors
         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "rgb(255, 0, 0)";
-       
+        list.style.visibility = "visible"; // Show the checklist
     }
 }
  
